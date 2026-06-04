@@ -23,6 +23,10 @@ description: 游戏原型图设计——根据系统策划案+参考游戏，分
 ```
 
 > **典型调用场景**：先用 `game-system-design` 完成系统设计，再将输出结果作为本 Skill 的输入。
+>
+> **⚠️ 前置依赖**：Step 6 需要 draw.io MCP 服务器。请让用户在首次使用前执行以下命令安装：
+> > `add_mcp_server name="drawio-mcp" transport="stdio" command="npx" args=["-y","@drawio/mcp"]`
+> 如跳过 Step 6 则无需安装。
 
 ## 执行模式——分步交互
 
