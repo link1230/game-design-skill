@@ -42,8 +42,10 @@ Step 3 ── 逐界面产出线框图 ──→ 每轮输出1个界面的文字
 Step 4 ── 交互流程串联 ──→ 画出界面间的跳转关系图
        ↓ ask_choice: [继续 / 修改后继续 / 终止]
 Step 5 ── 标注与验收 ──→ 补充尺寸/交互反馈/状态覆盖说明
+       ↓ ask_choice: [继续 / 修改后继续 / 终止]
+Step 6 ── 生成 draw.io 原型图 ──→ 将文字线框图转为可编辑的 .drawio 文件
        ↓
-完成，输出完整原型设计文档
+完成，输出完整原型设计文档 + draw.io 原型图文件
 ```
 
 ## 执行规则
@@ -172,6 +174,87 @@ P2（锦上添花）: N个
 - [ ] 空/满/锁定/报错态已覆盖
 - [ ] 交互流程无断链
 - [ ] 适配设计规范
+```
+
+### Step 6 · 生成 draw.io 原型图
+
+```
+根据用户确认后的完整设计方案，为每个界面生成 draw.io 可编辑的原型图文件。
+```
+
+**前置确认**：完成 Step 5 后，先向用户展示完整设计，用 ask_choice 确认是否生成 draw.io 文件：
+- [继续] → 开始生成
+- [修改后继续] → 用户指出修改点，调整后再生成
+- [跳过] → 不生成，直接完成
+
+**生成策略**：
+
+1. **每个界面独立文件**：Step 3 中的每个界面生成一个 `.drawio` 文件，命名规则 `{序号}_{界面名}.drawio`
+2. **全局导航文件**：生成一个 `00_导航总图.drawio`，对应 Step 4 的交互流程
+3. **所有文件放在当前工作目录**
+
+**draw.io XML 结构参考**：
+
+`.drawio` 文件本质是 XML，遵循 mxGraph 格式。标准骨架如下：
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="draw.io">
+  <diagram name="{界面名称}">
+    <mxGraphModel dx="800" dy="600" grid="1" gridSize="10"
+      guides="1" tooltips="1" connect="1" arrows="1"
+      page="1" pageWidth="827" pageHeight="1169">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- ====== 界面元素 ====== -->
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
+```
+
+**常用 mxCell 类型对照**：
+
+| UI 元素 | mxCell 样式 | 示例几何 |
+|---------|------------|---------|
+| 设备/窗口外框 | `rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;` | `x="0" y="0" width="390" height="844"` |
+| 面板/卡片 | `rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;` | `x="20" y="80" width="350" height="400"` |
+| 按钮 | `rounded=1;whiteSpace=wrap;html=1;arcSize=20;fillColor=#4A90D9;fontColor=#FFFFFF;` | `x="50" y="200" width="120" height="44"` |
+| 文本标签 | `text;whiteSpace=wrap;html=1;align=center;fontSize=14;` | `x="50" y="50" width="200" height="30"` |
+| 图标占位 | `shape=image;imageAspect=0;verticalAlign=top;` | `x="50" y="100" width="48" height="48"` |
+| 分割线 | `line;strokeWidth=1;html=1;` | `x="20" y="160" width="350" height="1"` |
+| 输入框 | `rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CCCCCC;` | `x="50" y="300" width="280" height="36"` |
+| 列表项 | `rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E0E0E0;` | `x="20" y="180" width="350" height="50"` |
+| 返回箭头 | `shape=arrow;arrowStyle=classic;size=0.3;fillColor=#333333;` | `x="15" y="44" width="24" height="24"` |
+| 底部导航栏 | `rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E0E0E0;fontSize=10;` | `x="0" y="780" width="390" height="64"` |
+| Tab 项 | `rounded=0;whiteSpace=wrap;html=1;align=center;fontSize=10;` | `x="0" y="780" width="97" height="64"` |
+
+**元素 id 规则**：按顺序自增整数（`"2"`、`"3"`、`"4"`...），id `"0"` 和 `"1"` 为 mxGraph 保留。
+
+**父子关系**：界面元素设置 `parent="1"`，id `"1"` 是默认的根图层。
+
+**坐标参考**：每个界面用一个**手机/屏幕外框容器**包裹，内部元素坐标相对于屏幕左上角：
+- 手机竖屏：width=390, height=844（iPhone 14 尺寸）
+- 手机横屏：width=844, height=390
+- 平板：width=820, height=1180
+- PC 窗口：width=1280, height=720
+
+**Guideline**：
+1. 保持与 Step 3 线框图布局一致，不增减元素
+2. 填充色用十六进制（如 `#F5F5F5`），简单配色即可
+3. 每行/列元素对齐，间距保持一致
+4. 按 Step 3 标注的状态变体，每个界面的主文件展示**默认态**即可
+5. 完成后用 ask_choice 提示用户打开 draw.io 验证
+
+**输出示例**：
+```
+生成的文件：
+  ├── 00_导航总图.drawio
+  ├── 01_主界面.drawio
+  ├── 02_角色选择界面.drawio
+  ├── 03_战斗HUD.drawio
+  └── 04_商店界面.drawio
 ```
 
 ## 约束
