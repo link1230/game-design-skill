@@ -1,6 +1,6 @@
 # 游戏设计 Skill Pack
 
-Reasonix Code 游戏设计三件套——从系统策划到原型图到资源需求，一站式输出。
+Reasonix Code 游戏设计四件套——从系统策划到原型图到资源需求到汇报文档，一站式输出。
 
 ## 包含的 Skill
 
@@ -9,22 +9,23 @@ Reasonix Code 游戏设计三件套——从系统策划到原型图到资源需
 | `game-system-design` | 交互式分步游戏系统策划 | 拆解系统→设计方案→数值建模→输出正式策划案 |
 | `game-ui-prototype` | 游戏原型图设计 | 根据策划案+参考游戏，产出文字线框图和交互流程 |
 | `game-asset-requirements` | 游戏资源需求整理 | 根据策划案+原型图，输出美术/音频/特效资源清单和排期 |
+| `game-design-to-html` | 策划案→HTML汇报文档 | 整合策划案+原型图+资源清单，生成可打印的精美HTML汇报文档 |
 
 ## 工作流
 
 ```
-game-system-design  ──→  game-ui-prototype  ──→  game-asset-requirements
-   (系统策划案)            (原型图设计)              (资源需求清单)
+game-system-design  ──→  game-ui-prototype  ──→  game-asset-requirements  ──→  game-design-to-html
+   (系统策划案)            (原型图设计)              (资源需求清单)              (HTML汇报文档)
 ```
 
 ## 安装方式
 
 ### 方式一：手动复制（推荐）
 
-1. 将本目录下的三个 `.md` 文件复制到你项目的 `.reasonix/skills/` 目录中：
+1. 将本目录下的四个 `.md` 文件复制到你项目的 `.reasonix/skills/` 目录中：
 
 ```bash
-cp game-*-design.md game-asset-requirements.md path/to/your/project/.reasonix/skills/
+cp game-*-design.md game-asset-requirements.md game-design-to-html.md path/to/your/project/.reasonix/skills/
 ```
 
 如果 `.reasonix/skills/` 目录不存在，先创建它：
@@ -73,6 +74,7 @@ done
 Step 1: /skill game-system-design   → 产出系统策划案
 Step 2: /skill game-ui-prototype    → 以策划案为输入，产出原型图
 Step 3: /skill game-asset-requirements → 以策划案+原型图为输入，产出资源清单
+Step 4: /skill game-design-to-html  → 整合以上所有产出，生成HTML汇报文档
 ```
 
 ## 文件说明
@@ -82,7 +84,8 @@ game-design-skill-pack/
 ├── README.md                         ← 本文件
 ├── game-system-design.md             ← 系统策划 Skill
 ├── game-ui-prototype.md              ← 原型图设计 Skill
-└── game-asset-requirements.md        ← 资源需求 Skill
+├── game-asset-requirements.md        ← 资源需求 Skill
+└── game-design-to-html.md            ← HTML汇报 Skill
 ```
 
 ## 前置要求
