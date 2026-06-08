@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.3.0] - 2025-07-16
+
+### Changed
+
+- **PPT 模式引擎替换** (⑤) — Prezentit API → python-pptx 本地生成。新流程：pip install python-pptx → 设计系统 RGB 映射 → 逐页构建（封面/要点/表格） → 写入 .pptx → QA 检查。蒸馏自 `powerpoint-pptx` skill 的 4 条核心规则。
+- **前置条件** — 移除 `PREZENTIT_API_KEY`，PPT 依赖改为 `pip install python-pptx`
+- **README.md** — 依赖说明 + 流程图更新
+
+## [1.2.0] - 2025-07-16
+
+### Added
+
+- **PPT 模式** (⑤) — `game-design-to-report` now supports dual output: HTML or PPT. Entry ask_choice lets user pick. PPT mode distills the Prezentit API: check credits → map design system → build outline from GDD → generate → download .pptx. 8 design systems mapped to customDesignPrompt templates.
+
+### Changed
+
+- **game-design-to-html** → **game-design-to-report** (⑤) — Renamed to reflect dual output; new frontmatter `name`, updated 角色设定, added PPT workflow (Steps P1-P5)
+- **README.md** — ⑤ entry updated with HTML/PPT dual output description; workflow diagram shows ".html/.pptx"
+
 ## [1.1.0] - 2025-07-16
 
 ### Added
