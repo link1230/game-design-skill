@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0] - 2025-07-16
+
+### Added
+
+- **game-design-gdd** (③) — New skill: writes formal GDD (Game Design Document) against ②'s prototype, one-to-one correspondence enforced. Follows standard GDD framework: §0 Overview → §1 System Design → §2 Interaction & UI → §3 Numerical Design → §4 Art Requirements. Outputs Excel (.xlsx).
+
+### Changed
+
+- **game-system-design** (①) — Step 5 output renamed from "正式策划案" to "策划案初稿", output format changed to Excel (.xlsx)
+- **game-ui-prototype** (②) — Updated input requirements: accepts ①'s draft Excel instead of final GDD
+- **game-asset-requirements** (③→④) — Renumbered; input now references ③'s formal GDD
+- **game-design-to-html** (④→⑤) — Renumbered; input references updated
+- **README.md** — "四件套" → "五件套"; workflow diagram, overview table, file listing all updated
+
 ## [1.0.0] - 2025-06-04
 
 ### Added
