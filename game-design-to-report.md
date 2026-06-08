@@ -1,6 +1,6 @@
 ---
 name: game-design-to-report
-description: 将已完成的策划案+原型图+资源清单整合为HTML汇报文档或PPT演示文稿——HTML自包含可打印 / PPT通过Prezentit API生成
+description: 将已完成的策划案+原型图+资源清单整合为HTML汇报文档或PPT演示文稿——HTML自包含可打印 / PPT通过python-pptx本地生成
 ---
 
 # 策划案 → HTML / PPT 汇报文档 Skill
