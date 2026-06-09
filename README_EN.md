@@ -14,7 +14,7 @@ A five-skill suite for Reasonix Code — from system design → prototype → fo
 | ② | `game-ui-prototype` | Dual-mode prototyping: full wireframes + draw.io / minimalist blueprint GDD | Pick mode first, then step-by-step |
 | ③ | `game-design-gdd` | Write formal GDD against prototype, output Excel — must match prototype 1:1 | Step-by-step (confirm each step) |
 | ④ | `game-asset-requirements` | Art / audio / VFX / other asset inventory + scheduling + outsourcing advice | Step-by-step (confirm each step) |
-| ⑤ | `game-design-to-report` | Consolidate prior outputs → HTML or PPT (8 design systems · python-pptx local generation) | Pick format, then one-shot generation |
+| ⑤ | `game-design-to-report` | Consolidate prior outputs → HTML or PPT (8 design systems · ppt-master SVG workflow for native editable PPTX) | Pick format, then one-shot generation |
 
 ---
 
@@ -27,7 +27,7 @@ A five-skill suite for Reasonix Code — from system design → prototype → fo
 │ Proposal │     │ Wireframe│     │ Systems  │     │ Audio    │    │ Design   │
 │ Numbers  │     │ Flow     │     │ UI/UX    │     │ VFX      │    │ Chapters │
 │ Mechanic │     │ draw.io  │     │ Balance  │     │ Schedule │    │ Systems  │
-│ Draft xls│     │ Prototype│     │ Art spec │     │ Outsourcing│   │ python-pptx│
+│ Draft xls│     │ Prototype│     │ Art spec │     │ Outsourcing│   │ ppt-master │
 └──────────┘     └──────────┘     └──────────┘     └──────────┘     └──────────┘
 ```
 
@@ -110,9 +110,13 @@ Choose between two modes at runtime:
 
 ### ⑤ game-design-to-report — HTML / PPT Report Generation
 
-Choose output format at runtime: **HTML** (self-contained single file, printable) or **PPT** (locally generated .pptx via python-pptx).
+Choose output format at runtime: **HTML** (self-contained single file, printable) or **PPT** (ppt-master SVG workflow).
 
-**8 Complete Design Systems** (distilled from ui-ux-pro-max):
+> PPT workflow distilled from [ppt-master](https://github.com/hugohe3/ppt-master) by Hugo He — AI-driven SVG→PPTX native editable pipeline.
+
+**Core pipeline**: Strategist Eight Confirmations → Image Acquisition → SVG page-by-page authoring → Quality Gate → Post-processing → Native editable PPTX export
+
+**8 Complete Design Systems** (distilled from ui-ux-pro-max), auto-matched at Strategist phase:
 
 | Theme | Best For |
 |-------|----------|
@@ -125,9 +129,18 @@ Choose output format at runtime: **HTML** (self-contained single file, printable
 | `industrial-brutalist` | Mecha / Military / Tactical |
 | `pixel-retro` | Pixel art / Retro / 2D action |
 
+**Key Innovations** (ppt-master core):
+- **Serial pipeline** — each step's output feeds the next; no cross-phase bundling
+- **Design-first, execute-second** — Strategist Eight Confirmations (⛔ blocking), auto-proceed on confirmation
+- **design_spec.md + spec_lock.md dual artifacts** — design narrative + execution contract
+- **Page-by-page hand-written SVG** — main agent authors each page; re-reads lock file before every page to resist context drift
+- **Pre-page spec_lock.md re-read** — colors/fonts/icons all from lock file, never from memory
+- **Quality gate** — errors must be fixed; warnings logged and continue
+- **Native DrawingML PPTX** — every shape, text box, and chart is directly editable in PowerPoint
+
 **Audience adaptation**: Automatically adjusts emphasis and tone for internal teams / investors / publishers / partners.
 
-**Quality assurance**: Built-in pre-delivery checklist (14 items) covering typography, accessibility, responsiveness, print styles, etc.
+**Quality assurance**: Built-in B4 quality checklist covering content completeness and visual consistency.
 
 ---
 
@@ -209,5 +222,5 @@ game-design-skill-pack/
 ## Prerequisites
 
 - **Platform**: Reasonix Code
-- **Dependencies**: HTML mode uses built-in tools; PPT mode requires `python-pptx` (`pip install python-pptx`)
+- **Dependencies**: HTML mode uses built-in tools; PPT mode requires no extra dependencies (hand-written SVG + direct export)
 - **Model**: `deepseek-v4-pro` recommended (complex design tasks benefit from stronger reasoning)
